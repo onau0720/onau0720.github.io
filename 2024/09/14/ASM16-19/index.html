@@ -1,0 +1,391 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>ASM16-19 --通讯录 | 翻斗花园</title><meta name="author" content="OnaU"><meta name="copyright" content="OnaU"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="ASM16通讯录处理菜单选项1234567891011cmp al,&#x27;1&#x27;jz ADD1cmp al,&#x27;2&#x27;jz DELETE1cmp al,&#x27;3&#x27;jz MODIFY1cmp al,&#x27;4&#x27;jz QUERY1cmp al,&#x27;5&#x27;jz EXIT1jmp DEFAULT1  根据用户输入的选项跳转到对应的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ASM16-19 --通讯录">
+<meta property="og:url" content="https://onau0720.github.io/2024/09/14/ASM16-19/index.html">
+<meta property="og:site_name" content="翻斗花园">
+<meta property="og:description" content="ASM16通讯录处理菜单选项1234567891011cmp al,&#x27;1&#x27;jz ADD1cmp al,&#x27;2&#x27;jz DELETE1cmp al,&#x27;3&#x27;jz MODIFY1cmp al,&#x27;4&#x27;jz QUERY1cmp al,&#x27;5&#x27;jz EXIT1jmp DEFAULT1  根据用户输入的选项跳转到对应的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://onau0720.github.io/img/1691042199087.jpg">
+<meta property="article:published_time" content="2024-09-14T14:35:43.000Z">
+<meta property="article:modified_time" content="2024-09-14T13:42:11.788Z">
+<meta property="article:author" content="OnaU">
+<meta property="article:tag" content="ASM16">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://onau0720.github.io/img/1691042199087.jpg"><link rel="shortcut icon" href="/img/1691042199087.jpg"><link rel="canonical" href="https://onau0720.github.io/2024/09/14/ASM16-19/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'ASM16-19 --通讯录',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-09-14 21:42:11'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/1691042199087.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="翻斗花园"><img class="site-icon" src="/img/1691042199087.jpg"/><span class="site-name">翻斗花园</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">ASM16-19 --通讯录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-09-14T14:35:43.000Z" title="发表于 2024-09-14 22:35:43">2024-09-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-14T13:42:11.788Z" title="更新于 2024-09-14 21:42:11">2024-09-14</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="ASM16-19 --通讯录"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="ASM16"><a href="#ASM16" class="headerlink" title="ASM16"></a>ASM16</h1><h2 id="通讯录"><a href="#通讯录" class="headerlink" title="通讯录"></a>通讯录</h2><h3 id="处理菜单选项"><a href="#处理菜单选项" class="headerlink" title="处理菜单选项"></a>处理菜单选项</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cmp al,&#x27;1&#x27;</span><br><span class="line">jz ADD1</span><br><span class="line">cmp al,&#x27;2&#x27;</span><br><span class="line">jz DELETE1</span><br><span class="line">cmp al,&#x27;3&#x27;</span><br><span class="line">jz MODIFY1</span><br><span class="line">cmp al,&#x27;4&#x27;</span><br><span class="line">jz QUERY1</span><br><span class="line">cmp al,&#x27;5&#x27;</span><br><span class="line">jz EXIT1</span><br><span class="line">jmp DEFAULT1</span><br></pre></td></tr></table></figure>
+
+<p>根据用户输入的选项跳转到对应的处理代码段。如果输入无效，跳转到<code>DEFAULT1</code>处理。</p>
+<h3 id="添加联系人"><a href="#添加联系人" class="headerlink" title="添加联系人"></a>添加联系人</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov dx, offset NEXT_LINE</span><br><span class="line">   mov ah, 09h</span><br><span class="line">   int 21h</span><br></pre></td></tr></table></figure>
+
+<p>然后换行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ADD1:   ;增加联系人</span><br><span class="line">    mov dx,offset INPUT_NAME</span><br><span class="line">    mov ah,09h</span><br><span class="line">    int 21h</span><br></pre></td></tr></table></figure>
+
+<p>提示输入联系人姓名。</p>
+<p><strong>09h - 显示字符串</strong></p>
+<p><strong>功能描述</strong>：显示从DX寄存器指向的内存地址开始的字符串，直到遇到字符串结束符号<code>$</code>为止。</p>
+<p><strong>输入</strong>：</p>
+<ul>
+<li><code>DX</code>：指向要显示的字符串的地址</li>
+<li><code>AH</code>：09h</li>
+</ul>
+<p><strong>输出</strong>：将字符串显示在屏幕上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov dx,offset NAME_BUF</span><br><span class="line">mov ah,0Ah</span><br><span class="line">int 21h</span><br></pre></td></tr></table></figure>
+
+<p>读取用户输入的姓名，存储在<code>NAME_BUF</code>中。</p>
+<p><strong>0Ah - 输入字符串</strong></p>
+<p><strong>功能描述</strong>：从标准输入设备（通常是键盘）读取字符串并存储到由DX指向的缓冲区中。用户输入的字符串存储在缓冲区中，以回车键（Enter）结束。</p>
+<p><strong>输入</strong>：</p>
+<ul>
+<li><code>DX</code>：指向输入缓冲区的地址</li>
+<li><code>AH</code>：0Ah</li>
+</ul>
+<p><strong>输出</strong>：输入的字符串存储在缓冲区中，第一个字节表示缓冲区的大小，第二个字节表示实际输入的字符数，后续字节存储实际输入的字符。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mov bx, dx                  ; 将 DX 寄存器的值（缓冲区地址）移动到 BX 寄存器中</span><br><span class="line">mov al, byte ptr [bx+1]     ; 从 [BX + 1] 地址处读取实际输入的字符数，存储到 AL 寄存器中</span><br><span class="line">mov ah, 0                   ; 将 AH 寄存器置为 0</span><br><span class="line">mov si, ax                  ; 将 AX 寄存器的值移动到 SI 寄存器中</span><br><span class="line">mov byte ptr [bx+si+2], &#x27;$&#x27; ; 在输入字符串末尾添加 &#x27;$&#x27; 字符</span><br></pre></td></tr></table></figure>
+
+<p>将姓名字符串的结尾设为<code>$</code>，以便显示。</p>
+<ol>
+<li><pre><code>mov bx, dx
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">   - 将 `DX` 寄存器的值移动到 `BX` 寄存器。此时，`BX` 寄存器中存储的是输入缓冲区的地址。</span><br><span class="line"></span><br><span class="line">2. ```</span><br><span class="line">   mov al, byte ptr [bx+1]</span><br></pre></td></tr></table></figure>
+
+- `BX` 寄存器指向输入缓冲区。
+- 输入缓冲区的结构是：
+  - 第一个字节：缓冲区的最大长度
+  - 第二个字节：实际输入的字符数
+  - 后续字节：存储实际输入的字符
+- `[bx+1]` 是实际输入的字符数的地址。将该值即实际输入的字符数移动到 `al` 寄存器中。
+</code></pre>
+</li>
+<li><pre><code>mov byte ptr [bx+si+2], &#39;$&#39;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">   - `SI` 寄存器中存储的是实际输入的字符数。</span><br><span class="line">   - `[bx+si+2]` 是输入字符串末尾的下一个位置。</span><br><span class="line">   - 将 `$` 字符存储到 `[bx+si+2]` 位置，标志输入字符串的结束。</span><br><span class="line"></span><br><span class="line">**示例**</span><br><span class="line"></span><br><span class="line">假设缓冲区 `NAME_BUF` 定义如下：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+NAME_BUF db 20, 0, 20 dup(0)
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">输入 `&quot;John&quot;` 后，缓冲区的内容如下：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+20, 4, &#39;J&#39;, &#39;o&#39;, &#39;h&#39;, &#39;n&#39;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">执行这段代码后：</span><br><span class="line"></span><br><span class="line">1. `BX` 指向缓冲区起始地址。</span><br><span class="line">2. 从 `[bx+1]` 读取实际输入的字符数 `4`，存储到 `SI`。</span><br><span class="line">3. 在 `[bx+4+2]` 即 `[bx+6]` 位置写入 `$`，缓冲区变为：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+20, 4, &#39;J&#39;, &#39;o&#39;, &#39;h&#39;, &#39;n&#39;, &#39;$&#39;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">这使得输入的字符串以 `$` 结束，可以使用 DOS 中断 21h, 功能码 09h 显示字符串。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+mov dx,offset INPUT_PHONE
+mov ah,09h
+int 21h
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">提示输入电话号码。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+mov dx,offset PHONE_BUF
+mov ah,0Ah
+int 21h
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">读取用户输入的电话号码，存储在`PHONE_BUF`中。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+mov bx,dx
+mov al,byte ptr [bx+1]
+mov ah,0
+mov si,ax
+mov byte ptr [bx+si+2],&#39;$&#39;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">将电话号码字符串的结尾设为`$`，以便显示。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+;保存数据
+mov bx,offset ALL_DATA
+mov ax,ds:[DATA_COUNT]
+mov cx,34
+mul cx
+add bx,ax ;ary+count*34
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">计算新联系人在`ALL_DATA`中的存储位置。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+ ;给标志
+ mov word ptr [bx],1
+ mov cx,8
+ mov si,2
+ mov bp,offset NAME_BUF
+LOOP1:
+ mov ax,word ptr ds:[bp+si]
+ mov word ptr [bx+si],ax
+ add si,2
+ dec cx
+ jnz LOOP1
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">复制姓名数据到`ALL_DATA`中的对应位置。</span><br><span class="line"></span><br><span class="line">**`mov ax, word ptr ds:[bp+si]`**：</span><br><span class="line"></span><br><span class="line">- 从 `NAME_BUF`（`BP` 寄存器指向）加上 `SI` 偏移量的位置读取一个字（16 位）到 `AX` 寄存器。</span><br><span class="line"></span><br><span class="line">**`mov word ptr [bx+si], ax`**：</span><br><span class="line"></span><br><span class="line">- 将 `AX` 中的数据写入到 `BX` 指向的位置加上 `SI` 偏移量的位置。</span><br><span class="line"></span><br><span class="line">**`add si, 2`**：</span><br><span class="line"></span><br><span class="line">- 更新 `SI` 寄存器，将其偏移量增加 2，移动到下一个字（16 位）的位置。</span><br><span class="line"></span><br><span class="line">**`dec cx`**：</span><br><span class="line"></span><br><span class="line">- 将 `CX` 寄存器的值减 1，减少循环次数。</span><br><span class="line"></span><br><span class="line">**`jnz LOOP1`**：</span><br><span class="line"></span><br><span class="line">- 如果 `CX` 不为零，则跳回 `LOOP1` 标签，继续循环</span><br><span class="line"></span><br><span class="line">**示例**</span><br><span class="line"></span><br><span class="line">假设 `NAME_BUF` 的内容如下：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+NAME_BUF db 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">执行这段代码时，`NAME_BUF` 从偏移量 `2` 开始的数据（`30 40`, `50 60`, `70 80`）将被复制到 `BX` 指向的内存位置，每次复制一个字（16 位）。这段代码假设 `NAME_BUF` 至少有 16 字节的数据。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+ mov cx,8
+ mov si,18
+ mov di,2
+ mov bp,offset PHONE_BUF
+LOOP2:
+ mov ax, word ptr ds:[bp+di]
+ mov word ptr [bx+si], ax
+ add si, 2
+ add di, 2
+ dec cx
+ jnz LOOP2
+ inc ds:[DATA_COUNT]
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">复制电话号码数据到`ALL_DATA`中的对应位置，并增加联系人数量。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+jmp SHOW_MENU
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">返回显示菜单。</span><br><span class="line"></span><br><span class="line">![image-20240914211913891](../image/image-20240914211913891.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+MyStack segment stack
+ db 256 dup(?)
+MyStack ends
+</code></pre>
+</li>
+</ol>
+<p>MyData segment<br>MENU1 db “1.add”,    0dh, 0ah<br>      db “2.delete”, 0dh, 0ah<br>      db “3.modify”, 0dh, 0ah<br>      db “4.query”,  0dh, 0ah<br>      db “5.exit”,   0dh, 0ah, ‘$’<br>INPUT_ERROR db “input error”, 0dh, 0ah, ‘$’<br>INPUT_NAME  db “input name:”, 0dh, 0ah, ‘$’<br>INPUT_PHONE db “input phone:”,0dh, 0ah, ‘$’<br>NAME_BUF db 16, 0, 16 dup(0)<br>PHONE_BUF db 16, 0, 16 dup(0)<br>ALL_DATA db 340 dup(0) ;flag[2] name[16] phone [16]<br>NEXT_LINE db 0DH, 0AH, ‘$’<br>DATA_COUNT dw 0 ;数量<br>MyData ends</p>
+<p>;代码段<br>MyCode segment<br>MAIN:<br>    mov ax, MyData<br>    mov ds, ax<br>    mov es, ax ;定义数据段</p>
+<p>SHOW_MENU:<br>    mov dx, offset MENU1<br>    mov ah, 09h<br>    int 21h ;显示菜单</p>
+<p>GET_INPUT:<br>    mov ah, 01h  ;获取用户输入<br>    int 21h</p>
+<pre><code>cmp al, &#39;1&#39;
+jz ADD1
+cmp al, &#39;2&#39;
+jz DELETE1
+cmp al, &#39;3&#39;
+jz MODIFY1
+cmp al, &#39;4&#39;
+jz QUERY1
+cmp al, &#39;5&#39;
+jz EXIT1
+jmp DEFAULT1
+</code></pre>
+<p>ADD1:<br>    mov dx, offset NEXT_LINE<br>    mov ah, 09h<br>    int 21h</p>
+<pre><code>;增加联系人
+mov dx, offset INPUT_NAME
+mov ah, 09h
+int 21h
+
+mov dx, offset NAME_BUF
+mov ah, 0Ah
+int 21h
+
+; 获取输入的字符串长度并添加终止符
+mov bx, dx
+mov al, byte ptr [bx+1]
+mov ah, 0
+mov si, ax
+mov byte ptr [bx+si+2], &#39;$&#39;
+
+mov dx, offset NEXT_LINE
+mov ah, 09h
+int 21h
+
+mov dx, offset INPUT_PHONE
+mov ah, 09h
+int 21h
+
+mov dx, offset PHONE_BUF
+mov ah, 0Ah
+int 21h
+
+; 获取输入的字符串长度并添加终止符
+mov bx, dx
+mov al, byte ptr [bx+1]
+mov ah, 0
+mov si, ax
+mov byte ptr [bx+si+2], &#39;$&#39;
+
+mov dx, offset NEXT_LINE
+mov ah, 09h
+int 21h
+
+; 保存数据
+mov bx, offset ALL_DATA
+mov ax, ds:[DATA_COUNT]
+mov cx, 34
+mul cx
+add bx, ax ; ary+count*34
+
+; 给标志
+mov word ptr [bx], 1
+mov cx, 8
+mov si, 2
+mov bp, offset NAME_BUF
+</code></pre>
+<p>LOOP1:<br>    mov ax, word ptr ds:[bp+si]<br>    mov word ptr [bx+si], ax<br>    add si, 2<br>    dec cx<br>    jnz LOOP1</p>
+<pre><code>mov cx, 8
+mov si, 18
+mov di, 2
+mov bp, offset PHONE_BUF
+</code></pre>
+<p>LOOP2:<br>    mov ax, word ptr ds:[bp+di]<br>    mov word ptr [bx+si], ax<br>    add si, 2<br>    add di, 2<br>    dec cx<br>    jnz LOOP2</p>
+<pre><code>inc ds:[DATA_COUNT]
+jmp SHOW_MENU
+</code></pre>
+<p>DELETE1:<br>    jmp SHOW_MENU</p>
+<p>MODIFY1:<br>    jmp SHOW_MENU</p>
+<p>QUERY1:<br>    mov dx, offset NEXT_LINE<br>    mov ah, 09h<br>    int 21h</p>
+<pre><code>mov bx, offset ALL_DATA
+mov cx, ds:[DATA_COUNT]
+</code></pre>
+<p>LOOP3:<br>    cmp word ptr [bx], 0<br>    je LABEL1</p>
+<pre><code>lea dx, [bx+2]
+mov ah, 09h
+int 21h
+mov dx, offset NEXT_LINE
+mov ah, 09h
+int 21h
+
+lea dx, [bx+18]
+mov ah, 09h
+int 21h
+mov dx, offset NEXT_LINE
+mov ah, 09h
+int 21h
+</code></pre>
+<p>LABEL1:<br>    add bx, 34 ; ary+count*34<br>    dec cx<br>    jnz LOOP3</p>
+<pre><code>jmp SHOW_MENU
+</code></pre>
+<p>EXIT1:<br>    mov ax, 4c00h ;退出程序<br>    int 21h</p>
+<p>DEFAULT1:<br>    mov dx, offset INPUT_ERROR<br>    mov ah, 09h<br>    int 21h<br>    jmp SHOW_MENU</p>
+<p>MyCode ends</p>
+<p>end MAIN</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 查询联系人</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>QUERY1:<br>    mov bx,offset ALL_DATA<br>    mov cx,ds:[DATA_COUNT]<br>LOOP3:<br>    cmp word ptr [bx],0<br>    je LABEL1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">开始查询联系人，从`ALL_DATA`中遍历联系人。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>lea dx,[bx+2]<br>mov ah,09h<br>int 21h</p>
+<p>mov dx,offset NEXT_LINE<br>mov ah,09h<br>int 21h</p>
+<p>lea dx,[bx+18]<br>mov ah,09h<br>int 21h</p>
+<p>mov dx,offset NEXT_LINE<br>mov ah,09h<br>int 21h</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">显示联系人姓名和电话号码。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>LABEL1:<br>    add bx,34 ;ary+count*34<br>    dec cx<br>    jnz LOOP3</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">处理下一个联系人。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>jmp SHOW_MENU</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">返回显示菜单。</span><br><span class="line"></span><br><span class="line">### 退出程序</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>EXIT1:<br>    mov ax,4c00h<br>    int 21h</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">退出程序。</span><br><span class="line"></span><br><span class="line">### 默认处理无效输入</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>DEFAULT1:<br>    mov dx,offset INPUT_ERROR<br>    mov ah,09h<br>    int 21h<br>    jmp SHOW_MENU</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">显示输入错误信息，并返回显示菜单。</span><br><span class="line"></span><br><span class="line">### 代码段结束</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>MyCode ends</p>
+<p>end MAIN</p>
+<pre><code>
+结束代码段，并定义程序入口点为`MAIN`。
+</code></pre>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://onau0720.github.io">OnaU</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://onau0720.github.io/2024/09/14/ASM16-19/">https://onau0720.github.io/2024/09/14/ASM16-19/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://onau0720.github.io" target="_blank">翻斗花园</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/ASM16/">ASM16</a></div><div class="post_share"><div class="social-share" data-image="/img/1691042199087.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/09/13/ASM16-16~18/" title="ASM16-16~18 --BCD码调整指令和控制类转移指令"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">ASM16-16~18 --BCD码调整指令和控制类转移指令</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/08/08/ASM16-11/" title="ASM16-11 --hello world（asm）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-08</div><div class="title">ASM16-11 --hello world（asm）</div></div></a></div><div><a href="/2024/09/03/ASM16-14~15/" title="ASM16-14 --算术运算类指令"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-03</div><div class="title">ASM16-14 --算术运算类指令</div></div></a></div><div><a href="/2024/08/14/ASM16-12/" title="ASM16-12 --键盘输入并回显"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-14</div><div class="title">ASM16-12 --键盘输入并回显</div></div></a></div><div><a href="/2024/08/16/ASM16-13/" title="ASM16-13 --数据传送类指令"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-16</div><div class="title">ASM16-13 --数据传送类指令</div></div></a></div><div><a href="/2024/09/13/ASM16-16~18/" title="ASM16-16~18 --BCD码调整指令和控制类转移指令"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-13</div><div class="title">ASM16-16~18 --BCD码调整指令和控制类转移指令</div></div></a></div><div><a href="/2024/07/27/ASM16-3and4/" title="ASM16-3、4  --ALU和寄存器"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-27</div><div class="title">ASM16-3、4  --ALU和寄存器</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/1691042199087.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">OnaU</div><div class="author-info__description">乌拉</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="Github"><i class="fab fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #000000;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ASM16"><span class="toc-number">1.</span> <span class="toc-text">ASM16</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%AE%AF%E5%BD%95"><span class="toc-number">1.1.</span> <span class="toc-text">通讯录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E8%8F%9C%E5%8D%95%E9%80%89%E9%A1%B9"><span class="toc-number">1.1.1.</span> <span class="toc-text">处理菜单选项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%81%94%E7%B3%BB%E4%BA%BA"><span class="toc-number">1.1.2.</span> <span class="toc-text">添加联系人</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/14/ASM16-19/" title="ASM16-19 --通讯录">ASM16-19 --通讯录</a><time datetime="2024-09-14T14:35:43.000Z" title="发表于 2024-09-14 22:35:43">2024-09-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/13/ASM16-16~18/" title="ASM16-16~18 --BCD码调整指令和控制类转移指令">ASM16-16~18 --BCD码调整指令和控制类转移指令</a><time datetime="2024-09-13T07:51:53.000Z" title="发表于 2024-09-13 15:51:53">2024-09-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/03/ASM16-14~15/" title="ASM16-14 --算术运算类指令">ASM16-14 --算术运算类指令</a><time datetime="2024-09-03T13:52:51.000Z" title="发表于 2024-09-03 21:52:51">2024-09-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/16/ASM16-13/" title="ASM16-13 --数据传送类指令">ASM16-13 --数据传送类指令</a><time datetime="2024-08-16T07:36:12.000Z" title="发表于 2024-08-16 15:36:12">2024-08-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/14/ASM16-12/" title="ASM16-12 --键盘输入并回显">ASM16-12 --键盘输入并回显</a><time datetime="2024-08-14T15:25:38.000Z" title="发表于 2024-08-14 23:25:38">2024-08-14</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By OnaU</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

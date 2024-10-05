@@ -1,0 +1,255 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>ASM16-3、4  --ALU和寄存器 | 翻斗花园</title><meta name="author" content="OnaU"><meta name="copyright" content="OnaU"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="ASM16ALU 算数逻辑单元命名：算术逻辑单元（Arithmetic&amp;Logic Unit），简称ALU组成：ALU有2个单元，算术单元（Arithmetic Unit）和逻辑单元（Logic Unit），算术单元负责计算机里的所有数字操作作用：计算机中负责运算的组件，处理数字&#x2F;逻辑的最基本单元 功能：  算术操作：加法、减法、乘法、除法等。 逻辑操作：AND、OR、NOT、X">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ASM16-3、4  --ALU和寄存器">
+<meta property="og:url" content="https://onau0720.github.io/2024/07/27/ASM16-3~4/index.html">
+<meta property="og:site_name" content="翻斗花园">
+<meta property="og:description" content="ASM16ALU 算数逻辑单元命名：算术逻辑单元（Arithmetic&amp;Logic Unit），简称ALU组成：ALU有2个单元，算术单元（Arithmetic Unit）和逻辑单元（Logic Unit），算术单元负责计算机里的所有数字操作作用：计算机中负责运算的组件，处理数字&#x2F;逻辑的最基本单元 功能：  算术操作：加法、减法、乘法、除法等。 逻辑操作：AND、OR、NOT、X">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://onau0720.github.io/img/1691042199087.jpg">
+<meta property="article:published_time" content="2024-07-27T14:52:56.000Z">
+<meta property="article:modified_time" content="2024-07-30T15:13:53.864Z">
+<meta property="article:author" content="OnaU">
+<meta property="article:tag" content="ASM16">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://onau0720.github.io/img/1691042199087.jpg"><link rel="shortcut icon" href="/img/1691042199087.jpg"><link rel="canonical" href="https://onau0720.github.io/2024/07/27/ASM16-3~4/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'ASM16-3、4  --ALU和寄存器',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-07-30 23:13:53'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/1691042199087.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="翻斗花园"><img class="site-icon" src="/img/1691042199087.jpg"/><span class="site-name">翻斗花园</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">ASM16-3、4  --ALU和寄存器</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-27T14:52:56.000Z" title="发表于 2024-07-27 22:52:56">2024-07-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-30T15:13:53.864Z" title="更新于 2024-07-30 23:13:53">2024-07-30</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="ASM16-3、4  --ALU和寄存器"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="ASM16"><a href="#ASM16" class="headerlink" title="ASM16"></a>ASM16</h1><h2 id="ALU-算数逻辑单元"><a href="#ALU-算数逻辑单元" class="headerlink" title="ALU 算数逻辑单元"></a><strong>ALU 算数逻辑单元</strong></h2><p><strong>命名</strong>：算术逻辑单元（Arithmetic&amp;Logic Unit），简称ALU<br><strong>组成</strong>：ALU有2个单元，算术单元（Arithmetic Unit）和逻辑单元（Logic Unit），算术单元负责计算机里的所有数字操作<br><strong>作用</strong>：计算机中负责运算的组件，处理数字&#x2F;逻辑的最基本单元</p>
+<p><strong>功能</strong>：</p>
+<ul>
+<li><strong>算术操作</strong>：加法、减法、乘法、除法等。</li>
+<li><strong>逻辑操作</strong>：AND、OR、NOT、XOR、比较等。</li>
+<li><strong>数据转换</strong>：如浮点数与整数之间的转换。</li>
+</ul>
+<p>cpu内部的算数操作都可以是加法（所谓的加法、减法、乘法、除法指令）</p>
+<p><strong>减法</strong>：通过反码的方式来将减法转换成加法运算，通过补码的方式消除了+0和-0的歧义。而在减法的运算结果中，还需要对结果进行补码。</p>
+<p><strong>乘法</strong>：计算机乘法是移位和累加实现的，每位的数字代表需要移动几位</p>
+<p><strong>除法</strong>：计算机除法的实现是移位和累减，首先对齐除数和被除数，对齐后相减，如果结果大于等于0，则记录商1；如果结果小于0，则记录商0之后右移，结果作为下次运算的被除数，并将商左移循环这个过程，直到除数移回原位，并记录余数</p>
+<p><strong>什么是指令系统</strong></p>
+<ul>
+<li>计算机的指令系统就是指该计算机能够执行的全部指令的集合</li>
+<li>每种计算机都有它支持的指令集合</li>
+<li>16位8086指令系统是Intel 80x86系列微处理器指令系统的基础</li>
+</ul>
+<p><strong>调试程序DEBUG</strong></p>
+<ul>
+<li><p>DEBUG是常用的汇编语言级调试工具，为汇编语言的程序员提供了分析指令、跟踪程序的有效手段</p>
+</li>
+<li><p>常用命令：</p>
+<ul>
+<li><p>-A汇编</p>
+</li>
+<li><p>-U反汇编</p>
+</li>
+<li><p>-T单步执行</p>
+</li>
+<li><p>-G断点执行</p>
+</li>
+<li><p>-D数据显示</p>
+</li>
+<li><p>-R寄存器</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>8086的寄存器组</strong></p>
+<ul>
+<li>对程序员来说，8086内部结构的最重要的是其寄存器组<ul>
+<li>8个通用寄存器</li>
+<li>1个指令指针寄存器</li>
+<li>1个标志寄存器</li>
+<li>4个段寄存器</li>
+</ul>
+</li>
+</ul>
+<p><img src="/../image/image-20240722220134643-17221825467123.png" alt="image-20240722220134643-17221825467123"></p>
+<p><strong>8086的通用寄存器</strong></p>
+<ul>
+<li><p>8086的16位通用寄存器是：AX BX CX DX </p>
+<p>​												SP BP SI DI</p>
+</li>
+<li><p>其中前4个数据寄存器都还可以分成高8位和低8位两个独立的寄存器</p>
+</li>
+<li><p>8086的8位通用寄存器是:AH BH CH DH</p>
+<p>​										   AL BL CL DL</p>
+</li>
+<li><p>对其中某8位的操作，并不影响另外对应8位的数据</p>
+</li>
+</ul>
+<p><strong>数据寄存器</strong></p>
+<ul>
+<li>数据寄存器用来存放计算的结果和操作数，也可以存放地址</li>
+<li>每个寄存器又有它们各自的专用目的<ul>
+<li>AX——累加器，使用频率最高，用于算术。逻辑运算以及与外设传送信息等</li>
+<li>BX——基址寄存器，常用做存放存储器地址</li>
+<li>CX——计数器，作为循环和串操作等指令中的隐含计数器</li>
+<li>DX——数据寄存器，常用来存放双字长数据的高16位，或存放外设端口地址</li>
+</ul>
+</li>
+</ul>
+<p><strong>变址寄存器</strong></p>
+<ul>
+<li><p>变址寄存器常用于存储器寻址时提供地址</p>
+<ul>
+<li>SI是源变址寄存器（Source）</li>
+<li>DI是目的变址寄存器（Destination）</li>
+</ul>
+</li>
+<li><p>串操作类指令中，SI和DI具有特别的功能</p>
+<p>操作数在存储器中，其有效地址是一个基址寄存器(BX、BP)和一个变址寄存器(SI、DI)的内容之和。其有效地址的计算公式如公式所示。<br><img src="/../image/274e593ebba17c00c0053f980d7b6692.jpeg" alt="img"></p>
+</li>
+</ul>
+<p><strong>指针寄存器</strong></p>
+<ul>
+<li>指针寄存器用于寻址内存堆栈内的数据</li>
+<li>SP为堆栈指针寄存器，指示栈顶的偏移地址</li>
+<li>SP不能再用于其他目的，具有专用目的</li>
+<li>BP为基址指针寄存器，表示数据在堆栈段中的基地址</li>
+<li>SP和BP寄存器与SS段寄存器联合使用以确定堆栈段中的存储单元地址</li>
+</ul>
+<p><strong>堆栈（Stack）</strong></p>
+<ul>
+<li>堆栈是主存中一个特殊的区域</li>
+<li>它采用<em>先进后出FILO（First In Last Out）</em>或<em>后进先出LIFO（Last In First Out）</em>的原则进行存取操作，而不是随机存取操作方式</li>
+<li>堆栈通常由处理器自动维持。在8086中，由堆栈段寄存器SS和堆栈指针寄存器SP共同指示</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://onau0720.github.io">OnaU</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://onau0720.github.io/2024/07/27/ASM16-3~4/">https://onau0720.github.io/2024/07/27/ASM16-3~4/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://onau0720.github.io" target="_blank">翻斗花园</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/ASM16/">ASM16</a></div><div class="post_share"><div class="social-share" data-image="/img/1691042199087.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/07/30/ASM16-5~6/" title="ASM16-5、6 --标志寄存器"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">ASM16-5、6 --标志寄存器</div></div></a></div><div class="next-post pull-right"><a href="/2024/07/26/ASM16-1~2/" title="ASM16-1、2 --汇编语言基础知识"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">ASM16-1、2 --汇编语言基础知识</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/08/08/ASM16-11/" title="ASM16-11 --hello world（asm）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-08</div><div class="title">ASM16-11 --hello world（asm）</div></div></a></div><div><a href="/2024/09/03/ASM16-14~15/" title="ASM16-14 --算术运算类指令"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-03</div><div class="title">ASM16-14 --算术运算类指令</div></div></a></div><div><a href="/2024/08/14/ASM16-12/" title="ASM16-12 --键盘输入并回显"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-14</div><div class="title">ASM16-12 --键盘输入并回显</div></div></a></div><div><a href="/2024/08/16/ASM16-13/" title="ASM16-13 --数据传送类指令"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-16</div><div class="title">ASM16-13 --数据传送类指令</div></div></a></div><div><a href="/2024/09/13/ASM16-16~18/" title="ASM16-16~18 --BCD码调整指令和控制类转移指令"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-13</div><div class="title">ASM16-16~18 --BCD码调整指令和控制类转移指令</div></div></a></div><div><a href="/2024/07/26/ASM16-1~2/" title="ASM16-1、2 --汇编语言基础知识"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-26</div><div class="title">ASM16-1、2 --汇编语言基础知识</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/1691042199087.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">OnaU</div><div class="author-info__description">乌拉</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xxxxx" target="_blank" title="Github"><i class="fab fa-github" style="color: #hdhfbb;"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #000000;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ASM16"><span class="toc-number">1.</span> <span class="toc-text">ASM16</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ALU-%E7%AE%97%E6%95%B0%E9%80%BB%E8%BE%91%E5%8D%95%E5%85%83"><span class="toc-number">1.1.</span> <span class="toc-text">ALU 算数逻辑单元</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/10/05/ASM16-25/" title="ASM16-25 --串操作指令">ASM16-25 --串操作指令</a><time datetime="2024-10-05T07:39:53.000Z" title="发表于 2024-10-05 15:39:53">2024-10-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/10/02/ASM16-22~24/" title="ASM16-22~24 --处理机控制类指令及位操作类指令">ASM16-22~24 --处理机控制类指令及位操作类指令</a><time datetime="2024-10-01T16:06:28.000Z" title="发表于 2024-10-02 00:06:28">2024-10-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/10/01/%E5%AF%B9%E4%BA%8Epython%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E7%9A%84exe%E5%8F%8Apyc%E7%9A%84%E9%80%86%E5%90%91/" title="对于python源码编译的exe及pyc的逆向">对于python源码编译的exe及pyc的逆向</a><time datetime="2024-09-30T17:02:01.000Z" title="发表于 2024-10-01 01:02:01">2024-10-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/16/ASM16-21/" title="ASM16-21 --函数（补充）和中断指令">ASM16-21 --函数（补充）和中断指令</a><time datetime="2024-09-16T08:33:32.000Z" title="发表于 2024-09-16 16:33:32">2024-09-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/15/ASM16-20/" title="ASM16-20 --花指令">ASM16-20 --花指令</a><time datetime="2024-09-15T12:38:25.000Z" title="发表于 2024-09-15 20:38:25">2024-09-15</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By OnaU</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
